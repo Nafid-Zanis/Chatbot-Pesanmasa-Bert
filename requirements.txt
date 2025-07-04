@@ -5,3 +5,5 @@ pickle
 torch
 scikit-learn
 transformers
+sentencepiece
+safetensors
