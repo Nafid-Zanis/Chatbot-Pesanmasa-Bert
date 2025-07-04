@@ -7,8 +7,8 @@ import torch
 from transformers import BertTokenizer, BertForSequenceClassification
 
 # === Load model & tokenizer ===
-model = BertForSequenceClassification.from_pretrained("chatbot-pesanmasa-bert")
-tokenizer = BertTokenizer.from_pretrained("chatbot-pesanmasa-bert")
+model = BertForSequenceClassification.from_pretrained("Nafid-Zanis/chatbot-pesanmasa-bert")
+tokenizer = BertTokenizer.from_pretrained("Nafid-Zanis/chatbot-pesanmasa-bert")
 
 # === Load label encoder ===
 with open("label_encoder.pkl", "rb") as f:
