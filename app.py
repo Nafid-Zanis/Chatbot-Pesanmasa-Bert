@@ -1,10 +1,11 @@
 # app.py
 import streamlit as st
+import torch
+from transformers import BertTokenizer, BertForSequenceClassification
 import json
 import random
 import pickle
-import torch
-from transformers import BertTokenizer, BertForSequenceClassification
+
 
 # === Load model & tokenizer ===
 model = BertForSequenceClassification.from_pretrained("Nafid-Zanis/chatbot-pesanmasa-bert")
