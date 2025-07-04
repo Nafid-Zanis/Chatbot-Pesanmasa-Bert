@@ -1,5 +1,6 @@
 # app.py
 import streamlit as st
+import torch
 from transformers import BertTokenizer, BertForSequenceClassification, pipeline
 import json
 import random
@@ -9,8 +10,6 @@ import pickle
 # === Load model & tokenizer ===
 model = BertForSequenceClassification.from_pretrained("Nafid-Zanis/chatbot-pesanmasa-bert")
 tokenizer = BertTokenizer.from_pretrained("Nafid-Zanis/chatbot-pesanmasa-bert")
-
-classifier = pipeline("text-classification", model="Nafid-Zanis/chatbot-pesanmasa-bert")
 
 
 # === Load label encoder ===
@@ -23,10 +22,12 @@ with open("datasets.json", "r") as f:
 
 # === Fungsi prediksi intent ===
 def predict_intent(text):
-    pred = classifier(text)[0]
-    tag = label_encoder.inverse_transform([int(pred["label"].split("_")[-1])])[0]
+    inputs = tokenizer(text, return_tensors="pt", truncation=True, padding=True)
+    with torch.no_grad():
+        outputs = model(**inputs)
+    predicted_class_id = torch.argmax(outputs.logits).item()
+    tag = label_encoder.inverse_transform([predicted_class_id])[0]
     return tag
-
 
 # === Fungsi ambil respons berdasarkan tag ===
 def get_response(tag):
