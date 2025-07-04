@@ -7,3 +7,4 @@ scikit-learn
 transformers
 sentencepiece
 safetensors
+huggingface_hub
