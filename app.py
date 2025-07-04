@@ -66,7 +66,7 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-st.markdown("<div style='text-align: center;'><img src='./pesanmasa.png' width='120'></div>", unsafe_allow_html=True)
+st.image("pesanmasa.png", width=120) 
 
 st.title("Chatbot Seputar PESANMASA")
 
