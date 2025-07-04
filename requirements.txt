@@ -2,7 +2,7 @@ streamlit
 json
 random
 pickle
-torch
+torch==2.0.1
 scikit-learn
 transformers
 sentencepiece
