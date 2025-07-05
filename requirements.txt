@@ -1,9 +1,0 @@
---extra-index-url https://download.pytorch.org/whl/cpu
-torch==2.0.1+cpu
-transformers==4.41.2
-tokenizers==0.19.1
-streamlit
-scikit-learn
-pandas
-numpy
-Pillow
