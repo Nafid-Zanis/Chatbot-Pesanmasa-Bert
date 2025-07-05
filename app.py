@@ -105,7 +105,6 @@ with st.form("chat_form", clear_on_submit=True):
         st.session_state.chat_history.append(("bot", response))
 
 # === Tampilkan chat ===
-st.markdown('<div class="chat-container">', unsafe_allow_html=True)
 # === CSS Styling ===
 st.markdown('<div class="chat-container">', unsafe_allow_html=True)
 for sender, message in reversed(st.session_state.chat_history):
