@@ -107,36 +107,8 @@ with st.form("chat_form", clear_on_submit=True):
 # === Tampilkan chat ===
 st.markdown('<div class="chat-container">', unsafe_allow_html=True)
 # === CSS Styling ===
-st.markdown("""
-    <style>
-    .chat-container {
-        background-color: #f0f0f0;
-        padding: 20px;
-        border-radius: 15px;
-        max-height: 500px;
-        overflow-y: auto;
-        display: flex;
-        flex-direction: column-reverse;
-        border: 1px solid #ddd;
-    }
-    .user-msg {
-        align-self: flex-start;  /* User di kiri */
-        background-color: #e0f7fa;
-        color: #000;
-        padding: 10px 15px;
-        margin: 6px 0;
-        border-radius: 15px 15px 15px 0;
-        max-width: 75%;
-    }
-    .bot-msg {
-        align-self: flex-end;  /* Bot di kanan */
-        background-color: #c8e6c9;
-        color: #000;
-        padding: 10px 15px;
-        margin: 6px 0;
-        border-radius: 15px 15px 0 15px;
-        max-width: 75%;
-        box-shadow: 0 0 5px rgba(0,0,0,0.1);
-    }
-    </style>
-""", unsafe_allow_html=True)
+st.markdown('<div class="chat-container">', unsafe_allow_html=True)
+for sender, message in reversed(st.session_state.chat_history):
+    css_class = "user-msg" if sender == "user" else "bot-msg"
+    st.markdown(f'<div class="{css_class}">{message}</div>', unsafe_allow_html=True)
+st.markdown('</div>', unsafe_allow_html=True)
