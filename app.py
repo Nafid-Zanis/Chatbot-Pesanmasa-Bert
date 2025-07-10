@@ -5,11 +5,8 @@ import pickle
 import torch
 from transformers import BertTokenizer, BertForSequenceClassification
 
-# Pilih device
-device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+# === Load model & tokenizer ===
 model = BertForSequenceClassification.from_pretrained("Nafid-Zanis/chatbot-pesanmasa-bert")
-model.to(device)  # <- ini WAJIB
-
 tokenizer = BertTokenizer.from_pretrained("Nafid-Zanis/chatbot-pesanmasa-bert")
 
 # === Load label encoder ===
@@ -20,12 +17,12 @@ with open("label_encoder.pkl", "rb") as f:
 with open("datasets.json", "r") as f:
     intents = json.load(f)
 
+# === Fungsi prediksi intent ===
 def predict_intent(text):
     inputs = tokenizer(text, return_tensors="pt", truncation=True, padding=True)
-    inputs = {k: v.to(device) for k, v in inputs.items()}  # <- PENTING
     with torch.no_grad():
         outputs = model(**inputs)
-    predicted_class_id = torch.argmax(outputs.logits, dim=1).item()
+    predicted_class_id = torch.argmax(outputs.logits).item()
     tag = label_encoder.inverse_transform([predicted_class_id])[0]
     return tag
 
